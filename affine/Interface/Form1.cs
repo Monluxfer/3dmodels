@@ -246,6 +246,19 @@ namespace Interface
                         }
                         DrawFigure();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Point2D[] generatix = new Point2D[]
+            {
+                new Point2D(10, 80),
+                new Point2D(10, 60),
+                new Point2D(40, 50),
+                new Point2D(40, 0)
+            };
+            f = new RotationFigure(Axis.Z, generatix, 5);
+            DrawFigure();
+        }
     }
   
 }
