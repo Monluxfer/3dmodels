@@ -36,6 +36,8 @@ namespace Render
             Point2D bottomVertex = new Point2D(0, _generatix.Last().Y);
             Point3d[] previous = new Point3d[_sides];
 
+            int index = topVertex != _generatix[0] ? 0 : 1;
+
             //if (topVertex != _generatix[0])
             {
                 float angle = 0;
@@ -43,7 +45,7 @@ namespace Render
                 for (int j = 0; j < _sides; ++j)
                 {
                     double radAngle = angle * Math.PI / 180.0;
-                    Point3d point = new Point3d(Math.Cos(radAngle) * _generatix[0].X, Math.Sin(radAngle) * _generatix[0].X, _generatix[0].Y);
+                    Point3d point = new Point3d(Math.Cos(radAngle) * _generatix[index].X, Math.Sin(radAngle) * _generatix[index].X, _generatix[index].Y);
                     Add(new Line(vertex, point));
                     previous[j] = point;
                     angle += _rotation;
@@ -58,8 +60,9 @@ namespace Render
                 }
             }
 
+            ++index;
             // main cycle
-            for (int i = 1; i < _generatix.Length; ++i)
+            for (int i = index; i < _generatix.Length; ++i)
             {
                 float angle = 0;
                 for (int j = 0; j < _sides; ++j)
@@ -80,7 +83,7 @@ namespace Render
                 }
             }
 
-            //if (bottomVertex != _generatix.Last())
+            if (bottomVertex != _generatix.Last())
             {
                 Point3d vertex = new Point3d(0, 0, bottomVertex.Y);
                 for (int i = 0; i < _sides; ++i)
