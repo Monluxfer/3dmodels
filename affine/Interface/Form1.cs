@@ -256,7 +256,14 @@ namespace Interface
                 new Point2D(40, 50),
                 new Point2D(40, 0)
             };
-            f = new RotationFigure(Axis.Z, generatix, 4);
+            f = new RotationFigure(Axis.X, generatix, 20);
+            f.Save("temp");
+            f = null;
+            f = new Figure();
+            f.Load("temp");
+            //Rotate(0, 90);
+            
+            //f.RotateX(90);
             //f.toVersion2();
             DrawFigure();
         }
