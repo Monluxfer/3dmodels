@@ -28,6 +28,14 @@ namespace Render
             _rotation = 360f / sides;
             _sides = sides;
             Initialize();
+            if (mainAxis == Axis.Y)
+            {
+                RotateX(Math.PI / 2);
+            }
+            else if (mainAxis == Axis.X)
+            {
+                RotateY(-Math.PI / 2);
+            }
         }
 
         private void Initialize()

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Render;
+using Parser;
 
 namespace Interface
 {
@@ -249,23 +250,26 @@ namespace Interface
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Point2D[] generatix = new Point2D[]
+            try
             {
-                new Point2D(10, 80),
-                new Point2D(10, 60),
-                new Point2D(40, 50),
-                new Point2D(40, 0)
-            };
-            f = new RotationFigure(Axis.X, generatix, 20);
-            f.Save("temp");
-            f = null;
-            f = new Figure();
-            f.Load("temp");
-            //Rotate(0, 90);
-            
-            //f.RotateX(90);
-            //f.toVersion2();
-            DrawFigure();
+                Point2D[] generatix = PointsParser.Parse(textBox1.Text).ToArray();
+                Axis ax = (Axis)comboBox1.SelectedIndex;
+                int sides = (int)numericUpDown1.Value;
+                f = new RotationFigure(Axis.Y, generatix, sides);
+                f.Save("temp");
+                f = null;
+                f = new Figure();
+                f.Load("temp");
+                if (ax == Axis.Y) Rotate(0, Math.PI / 2);
+                else if (ax == Axis.X) Rotate(1, -Math.PI / 2);
+                else Rotate(1, Math.PI);
+                
+                DrawFigure();
+            }
+            catch (Exception _)
+            {
+                MessageBox.Show("Incorrect input", "Parsing error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
   
