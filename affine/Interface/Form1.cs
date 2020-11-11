@@ -266,6 +266,10 @@ namespace Interface
                 
                 DrawFigure();
             }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception _)
             {
                 MessageBox.Show("Incorrect input", "Parsing error", MessageBoxButtons.OK, MessageBoxIcon.Error);

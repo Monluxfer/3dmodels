@@ -23,19 +23,12 @@ namespace Render
         public RotationFigure(Axis mainAxis, Point2D[] generatix, int sides) : base()
         {
             if (sides < 3) throw new ArgumentException("Count of sides must be more then 2");
+            if (generatix.Length < 2) throw new ArgumentException("Count of generatix must be more then 1");
             _mainAxis = mainAxis;
             _generatix = generatix;
             _rotation = 360f / sides;
             _sides = sides;
             Initialize();
-            if (mainAxis == Axis.Y)
-            {
-                RotateX(Math.PI / 2);
-            }
-            else if (mainAxis == Axis.X)
-            {
-                RotateY(-Math.PI / 2);
-            }
         }
 
         private void Initialize()
@@ -98,6 +91,17 @@ namespace Render
                 {
                     Add(new Line(vertex, previous[i]));
                 }
+            }
+        }
+        private void _rotate(Axis ax)
+        {
+            if (ax == Axis.Y)
+            {
+                RotateX(Math.PI / 2);
+            }
+            else if (ax == Axis.X)
+            {
+                RotateY(-Math.PI / 2);
             }
         }
     }
